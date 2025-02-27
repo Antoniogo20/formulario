@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Contacto</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Degradado de fondo del cuerpo */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    
+    .form-container {
+      background: linear-gradient(135deg, #ffffff, #f2f2f2); /* Degradado de fondo del formulario */
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+    
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+      position: relative;
+    }
+    
+    .input-group label {
+      font-size: 14px;
+      color: #666;
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    .input-group input,
+    .input-group textarea {
+      width: 100%;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      padding-left: 35px; /* Espacio para el icono */
+    }
+    
+    .input-group input:focus,
+    .input-group textarea:focus {
+      border-color: #6c63ff;
+    }
+    
+    .input-group i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+    }
+    
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+    
+    .submit-btn {
+      background: linear-gradient(135deg, #6c63ff, #3e56ff); /* Degradado del botón */
+      color: white;
+      font-size: 16px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-top: 20px;
+    }
+    
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #3e56ff, #6c63ff); /* Cambio de degradado al pasar el mouse */
+      transform: scale(1.05); /* Efecto de escala al pasar el mouse */
+    }
+    
+    .submit-btn i {
+      margin-right: 10px;
+    }
+    
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+      display: block;
+    }
+    
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .footer a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Estilo para el recuadro de aceptación de términos */
+    .checkbox-label {
+      font-size: 14px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    .checkbox-label input {
+      margin-right: 10px;
+    }
+    
+    .checkbox-label a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    
+    .checkbox-label a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Formulario de Contacto</h2>
+    <form id="contact-form" action="#" method="POST" onsubmit="return validarForm(event)">
+      <div class="input-group">
+        <label for="nombre"><i class="fas fa-user"></i> Nombre</label>
+        <input type="text" id="nombre" name="nombre" required placeholder="Introduce tu nombre">
+        <span class="error" id="nombre-error"></span>
+      </div>
+      <div class="input-group">
+        <label for="cif"><i class="fas fa-id-card"></i> CIF</label>
+        <input type="text" id="cif" name="cif" required placeholder="Introduce tu CIF" pattern="^[A-Za-z0-9]{9}$">
+        <span class="error" id="cif-error"></span>
+      </div>
+      <div class="input-group">
+        <label for="telefono"><i class="fas fa-phone"></i> Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" required placeholder="Introduce tu teléfono" pattern="^[0-9]{9}$">
+        <span class="error" id="telefono-error"></span>
+      </div>
+      <div class="input-group">
+        <label for="mensaje"><i class="fas fa-comment-dots"></i> Mensaje</label>
+        <textarea id="mensaje" name="mensaje" required placeholder="Escribe tu mensaje"></textarea>
+      </div>
+      <div class="input-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="accept-terms" required>
+          Acepto las <a href="/politicas-de-privacidad" target="_blank">Políticas de Privacidad</a>, los <a href="/terminos-y-condiciones" target="_blank">Términos y Condiciones</a>, y la <a href="/politica-de-cookies" target="_blank">Política de Cookies</a>.
+        </label>
+      </div>
+      <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Enviar</button>
+    </form>
+  </div>
+  <div id="success-message" class="success-message" style="display: none;">
+    <p>¡Formulario enviado correctamente! Gracias por contactarnos.</p>
+  </div>
+  <script>
+    function validarForm(event) {
+      event.preventDefault();  // Prevenir el envío tradicional del formulario
+      let valid = true;
+      
+      // Limpiar mensajes de error
+      document.getElementById("nombre-error").innerText = "";
+      document.getElementById("cif-error").innerText = "";
+      document.getElementById("telefono-error").innerText = "";
+      
+      // Validar Nombre
+      const nombre = document.getElementById("nombre").value;
+      if (nombre.trim() === "") {
+        document.getElementById("nombre-error").innerText = "El nombre es obligatorio.";
+        valid = false;
+      }
+      
+      // Validar CIF (debe ser 9 caracteres alfanuméricos o dejar vacío)
+      const cif = document.getElementById("cif").value;
+      const cifRegex = /^[A-Za-z0-9]{9}$/;
+      if (cif.trim() !== "" && !cifRegex.test(cif)) {
+        document.getElementById("cif-error").innerText = "El CIF debe tener 9 caracteres alfanuméricos.";
+        valid = false;
+      }
+      
+      // Validar Teléfono (debe ser 9 dígitos, no más)
+      const telefono = document.getElementById("telefono").value;
+      const telefonoRegex = /^[0-9]{9}$/;
+      if (telefono.trim() !== "") {
+        if (!telefonoRegex.test(telefono)) {
+          document.getElementById("telefono-error").innerText = "El teléfono debe ser de 9 dígitos.";
+          valid = false;
+        }
+      } else if (telefono.length > 9) {
+        document.getElementById("telefono-error").innerText = "El teléfono no puede tener más de 9 dígitos.";
+        valid = false;
+      }
+      
+      // Validación del checkbox de aceptación de términos
+      const acceptTerms = document.getElementById("accept-terms").checked;
+      if (!acceptTerms) {
+        valid = false;
+        alert("Debes aceptar las políticas para enviar el formulario.");
+      }
+      
+      // Si todo es válido, mostrar mensaje de éxito
+      if (valid) {
+        document.getElementById("contact-form").reset(); // Limpiar el formulario
+        document.getElementById("success-message").style.display = "block"; // Mostrar mensaje de éxito
+        setTimeout(function() {
+          document.getElementById("success-message").style.display = "none"; // Ocultar el mensaje después de 5 segundos
+        }, 5000);
+      }
+      
+      return valid;  // Devuelve si es válido o no
+    }
+  </script>
+</body>
+</html>
